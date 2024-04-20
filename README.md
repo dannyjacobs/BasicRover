@@ -13,3 +13,4 @@ This is a collection of scrapts used to build a quick draft of an "exploration" 
 ## Contents of this repo
  - Drive code - latest is simpledrive2.py To drive, log in over ssh and execute.
  - cam streaming, see hazcam.md
+ - Basic streaming Arduino digitizer
