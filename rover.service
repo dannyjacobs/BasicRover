@@ -1,0 +1,9 @@
+[Unit]
+Description=Rover Services
+
+[Service]
+User=rover
+ExecStart=mjpg_streamer -o "output_http.so -p 8085" -i "input_uvc.so"
+
+[Install]
+WantedBy=multi-user.target
