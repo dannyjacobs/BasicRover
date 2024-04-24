@@ -54,6 +54,8 @@ def main(stdscr):
         k = stdscr.getch()
         stdscr.clear()
         display(stdscr)
+        if int(k) in list(range(1+48,10+48)):
+            throttle = (float(k)-48) * 255/9
         if k==curses.KEY_LEFT: 
             stdscr.addstr(7, controlXPos,"DRIVING LEFT")
             control(k,throttle)
@@ -72,6 +74,7 @@ def main(stdscr):
             brakes()
         stdscr.addstr(8,controlXPos, "    ")
         stdscr.addstr(8,controlXPos, str(k))
+        stdscr.addstr(9,controlXPos,"Throttle = "+str(int(throttle/255*9)))
         stdscr.refresh()
         sleep(0.1)
     
