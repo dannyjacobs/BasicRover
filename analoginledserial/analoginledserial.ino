@@ -27,12 +27,13 @@
 int sensorValue = 0;  // value read from the pot
 int outputValue = 0;  // value output to the PWM (analog out)
 int PWMValue = 0;
+int nsample = 100; //number of samples to average
 int ledPins[] = {
   2, 3, 4, 5, 6, 7, 8.
 };                 // an array of pin numbers to which LEDs are attached
-int pinCount = 6;  // the number of pins (i.e. the length of the array)
+int pinCount = 9;  // the number of pins (i.e. the length of the array)
 int ADCchans[] = {
-  A2, A3, A4, A5, A6, A7, A8  //ADC channels, sorted to match PWM pins
+  A0,A1, A2, A3, A4, A5, A6, A7, A8  //ADC channels, sorted to match PWM pins
 };
 int ADCvals[] = {
   -1, -1, -1, -1, -1, -1, -1, -1
@@ -49,7 +50,14 @@ void setup() {
 
 void readADCs() {
   for (int thisPin = 0; thisPin <  pinCount; thisPin++){
-    ADCvals[thisPin] = analogRead(ADCchans[thisPin]);
+    unsigned int accum =0;
+    unsigned int n =0;
+    while(n<nsample){
+      accum += analogRead(ADCchans[thisPin]);
+      n +=1;
+    }
+    //ADCvals[thisPin] = analogRead(ADCchans[thisPin]);
+    ADCvals[thisPin] = accum/nsample;
   }
 
 }
